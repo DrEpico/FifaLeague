@@ -1,0 +1,378 @@
+USE EAFC24
+GO
+
+--CREATE TABLE leagues (
+--    league_id INT IDENTITY(1,1) PRIMARY KEY,
+--    league_name NVARCHAR(50)
+--);
+
+--INSERT INTO leagues (league_name)
+--VALUES ('unknown');
+
+
+--INSERT INTO leagues (league_name)
+--VALUES ('England Premier League'),
+--		('France Ligue 1'),
+--		('Germany Bundesliga'),
+--		('Italy Serie A'),
+--		('Spain La Liga')
+
+--CREATE TABLE clubs (
+--    club_id INT IDENTITY(1,1) PRIMARY KEY,
+--    club_name NVARCHAR(50),
+--    league_id INT,
+--    FOREIGN KEY (league_id) REFERENCES leagues(league_id)
+--);
+
+--INSERT INTO clubs (club_name)
+--SELECT DISTINCT Club
+--FROM players;
+
+--UPDATE clubs
+--	SET league_id = CASE
+--	WHEN club_name LIKE '%Barcelona SC%' THEN 1
+--	ELSE league_id
+--END;
+
+--UPDATE clubs
+--SET league_id = 6
+--WHERE club_name IN (
+--    'Athletic Club',
+--    'Atlético de Madrid',
+--    'CA Osasuna',
+--    'Cádiz CF',
+--    'D. Alavés',
+--    'FC Barcelona',
+--    'Getafe CF',
+--    'Girona FC',
+--    'Granada CF',
+--    'Rayo Vallecano',
+--    'RC Celta',
+--    'RCD Mallorca',
+--    'Real Betis',
+--    'Real Madrid',
+--    'Real Sociedad',
+--    'Sevilla FC',
+--    'UD Almería',
+--    'UD Las Palmas',
+--    'Valencia CF',
+--    'Villarreal CF'
+--);
+
+--SELECT *
+--FROM clubs
+--WHERE league_id = 6;
+
+--UPDATE clubs
+--SET league_id = 2
+--WHERE club_name IN (
+--    'Arsenal',
+--    'Aston Villa',
+--    'Brentford',
+--    'Brighton',
+--    'Burnley',
+--    'Chelsea',
+--    'Crystal Palace',
+--    'Everton',
+--    'Luton Town',
+--    'Liverpool',
+--    'Manchester City',
+--    'Manchester Utd',
+--    'Newcastle Utd',
+--	'Nott''m Forest',
+--    'Southampton',
+--    'Tottenham Hotspur',
+--    'Watford',
+--    'Westham Utd',
+--    'Wolves',
+--	'Fulham',
+--	'Sheffield Utd'
+--);
+
+--SELECT *
+--FROM clubs
+--WHERE league_id = 2;
+
+--UPDATE clubs
+--SET league_id = 1
+--WHERE club_name IN (
+--    'Leeds United',
+--    'Norwich'
+--);
+
+--UPDATE clubs
+--SET league_id = 5
+--WHERE club_name IN (
+--    'Inter',
+--    'Milan',
+--    'Juventus',
+--    'Bologna',
+--    'Roma FC',
+--    'Bergamo Calcio',
+--    'Latium',
+--    'Fiorentina',
+--    'Napoli',
+--    'Torino',
+--    'AC Monza',
+--    'Genoa',
+--    'Lecce',
+--    'Cagliari',
+--    'Hellas Verona',
+--    'Frosinone',
+--    'Empoli',
+--    'Udinese',
+--    'Sassuolo',
+--    'Salernitana'
+--);
+
+--SELECT *
+--FROM clubs
+--WHERE league_id = 5;
+
+--UPDATE clubs
+--SET league_id = 4
+--WHERE club_name IN (
+--    'Leverkusen',
+--    'FC Bayern München',
+--    'VfB Stuttgart',
+--    'RB Leipzig',
+--    'Borussia Dortmund',
+--    'Frankfurt',
+--    'SC Freiburg',
+--    'FC Augsburg',
+--    'TSG 1899 Hoffenheim',
+--    'TSG Hoffenheim',
+--    'SV Werder Bremen',
+--    'VfL Wolfsburg',
+--    'M''gladbach',
+--    'Union Berlin',
+--    'VfL Bochum',
+--    '1. FSV Mainz 05',
+--    '1. FC Köln',
+--    'SV Darmstadt 98'
+--);
+
+--SELECT *
+--FROM clubs
+--WHERE league_id = 4;
+
+--UPDATE clubs
+--SET league_id = 3
+--WHERE club_name IN (
+--    'Paris SG',
+--    'OM',
+--    'OL',
+--    'AS Monaco',
+--    'RC Lens',
+--    'LOSC Lille',
+--    'Strasbourg',
+--    'FC Nantes',
+--    'Stade Rennais',
+--    'Montpellier',
+--    'OGC Nice',
+--    'Stade Rennais FC', 
+--	'Havre AC', 
+--	'FC Metz', 
+--	'Toulouse FC', 
+--	'FC Lorient', 
+--	'Stade Brestois 29', 
+--	'Clermont Foot 63'
+--);
+
+--SELECT *
+--FROM clubs
+--WHERE league_id = 3;
+
+SELECT *
+FROM players 
+WHERE name LIKE N'Antonio Rüdiger';
+
+--SELECT *
+--FROM clubs
+--WHERE club_id = 52;
+
+---- Step 1: Add the club_id column to the players table
+--ALTER TABLE players
+--ADD club_id INT;
+
+---- Step 2: Populate the club_id column based on club names
+--UPDATE players
+--SET club_id = (
+--    SELECT club_id
+--    FROM clubs
+--    WHERE clubs.club_name = players.Club
+--);
+
+---- Step 3: Create the foreign key constraint
+--ALTER TABLE players
+--ADD CONSTRAINT FK_players_clubs
+--FOREIGN KEY (club_id)
+--REFERENCES clubs (club_id);
+
+--SELECT * FROM clubs 
+--ORDER BY league_id DESC
+
+--SELECT * FROM players;
+
+--SELECT DISTINCT column1 FROM players;
+
+--ALTER TABLE players
+--ADD player_id INT IDENTITY(1,1) PRIMARY KEY;
+
+-- Step 1: Create a new table with the desired column order
+--CREATE TABLE players_new (
+--    player_id INT IDENTITY(0001,1) PRIMARY KEY NOT NULL,
+--    name VARCHAR(50) NOT NULL,
+--	nation VARCHAR(50) NOT NULL,
+--	club_id INT NOT NULL,
+--	original_club VARCHAR(50) NOT NULL,
+--	position VARCHAR(50) NOT NULL,
+--	age tinyint NOT NULL,
+--	overall tinyint NOT NULL,
+--	pace tinyint NOT NULL,
+--	shooting tinyint NOT NULL, 
+--	passing tinyint NOT NULL,
+--	dribbling tinyint NOT NULL,
+--	defending tinyint NOT NULL,
+--	physicality tinyint NOT NULL,
+--	acceleration tinyint NOT NULL,
+--	sprint tinyint NOT NULL,
+--	positioning tinyint NOT NULL,
+--	finishing tinyint NOT NULL,
+--	shot tinyint NOT NULL,
+--	long tinyint NOT NULL,
+--	volleys tinyint NOT NULL,
+--	penalties tinyint NOT NULL,
+--	vision tinyint NOT NULL,
+--	crossing tinyint NOT NULL, 
+--	free tinyint NOT NULL,
+--	curve tinyint NOT NULL,
+--	agility tinyint NOT NULL,
+--	balance tinyint NOT NULL,
+--	reactions tinyint NOT NULL, 
+--	ball tinyint NOT NULL,
+--	composure tinyint NOT NULL,
+--	interceptions tinyint NOT NULL,
+--	heading tinyint NOT NULL,
+--	def tinyint NOT NULL,
+--	standing tinyint NOT NULL,
+--	sliding tinyint NOT NULL, 
+--	jumping tinyint NOT NULL,
+--	stamina tinyint NOT NULL, 
+--	strength tinyint NOT NULL, 
+--	aggression tinyint NOT NULL,
+--	att_work_rate NVARCHAR(50) NOT NULL,
+--	def_work_rate NVARCHAR(50) NOT NULL,
+--	preferred_foot NVARCHAR(50) NOT NULL,
+--	weak_foot tinyint NOT NULL,
+--	skill_moves tinyint NOT NULL,
+--	URL NVARCHAR(100) NOT NULL,
+--	gender NVARCHAR(50) NOT NULL,
+--	GK tinyint,
+--);
+
+--INSERT INTO players_new (
+--    name,
+--    nation,
+--    club_id,
+--    original_club,
+--    position,
+--    age,
+--    overall,
+--    pace,
+--    shooting,
+--    passing,
+--    dribbling,
+--    defending,
+--    physicality,
+--    acceleration,
+--    sprint,
+--    positioning,
+--    finishing,
+--    shot,
+--    long,
+--    volleys,
+--    penalties,
+--    vision,
+--    crossing,
+--    free,
+--    curve,
+--    agility,
+--    balance,
+--    reactions,
+--    ball,
+--    composure,
+--    interceptions,
+--    heading,
+--    def,
+--    standing,
+--    sliding,
+--    jumping,
+--    stamina,
+--    strength,
+--    aggression,
+--    att_work_rate,
+--    def_work_rate,
+--    preferred_foot,
+--    weak_foot,
+--    skill_moves,
+--    URL,
+--    gender,
+--    GK
+--)
+--SELECT
+--    [Name],
+--    [Nation],
+--    [club_id],
+--    [OriginalClub],
+--    [Position],
+--    [Age],
+--    [Overall],
+--    [Pace],
+--    [Shooting],
+--    [Passing],
+--    [Dribbling],
+--    [Defending],
+--    [Physicality],
+--    [Acceleration],
+--    [Sprint],
+--    [Positioning],
+--    [Finishing],
+--    [Shot],
+--    [Long],
+--    [Volleys],
+--    [Penalties],
+--    [Vision],
+--    [Crossing],
+--    [Free],
+--    [Curve],
+--    [Agility],
+--    [Balance],
+--    [Reactions],
+--    [Ball],
+--    [Composure],
+--    [Interceptions],
+--    [Heading],
+--    [Def],
+--    [Standing],
+--    [Sliding],
+--    [Jumping],
+--    [Stamina],
+--    [Strength],
+--    [Aggression],
+--    [Att_work_rate],
+--    [Def_work_rate],
+--    [Preferred_foot],
+--    [Weak_foot],
+--    [Skill_moves],
+--    [URL],
+--    [Gender],
+--    [GK]
+--FROM [dbo].[players];
+
+--DROP TABLE players_new;
+
+--SELECT *
+--FROM dbo.players_new
+--SELECT *
+--FROM dbo.players
