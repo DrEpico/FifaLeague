@@ -510,7 +510,24 @@ CREATE TABLE career_stats (
 --FOREIGN KEY (stats_id)
 --REFERENCES career_stats (stats_id);
 
+--ALTER TABLE managers
+--ADD league_admin BIT DEFAULT 'FALSE';
 
+SELECT * FROM clubs 
+WHERE club_name = 'Chelsea'
+
+SELECT * FROM clubs 
+WHERE manager_id IS NOT NULL;
+
+SELECT * FROM managers;
+
+UPDATE clubs
+SET manager_id = NULL
+WHERE club_name = 'Arsenal'
+DELETE FROM managers;
+
+DELETE FROM managers
+WHERE manager_id = 12;
 
 
 
