@@ -10,6 +10,10 @@ import java.util.ArrayList;
  * Main class
  */
 public class LeagueApp {
+    public static String url = "jdbc:sqlserver://localhost:1433;encrypt=true;databaseName=EAFC24;trustServerCertificate=true";
+    public static String username = "sql";
+//    public static String password = "0000";
+
     int season = 1;
     ArrayList<Team> teams = new ArrayList<>();
 
@@ -18,7 +22,6 @@ public class LeagueApp {
         resetSeasonData();
         addPlayerAge();
     }
-
 
     //todo: player upgreade based on position
 
@@ -46,24 +49,8 @@ public class LeagueApp {
     }
 
     public static void main(String[] args) throws SQLException {
-        String sql = "SELECT league_name FROM leagues WHERE league_id = 4;";
-        String url = "jdbc:sqlserver://localhost:1433;encrypt=true;databaseName=EAFC24;trustServerCertificate=true";
-        String username = "sql";
-        String password = "0000";
-
-
-        Connection con = DriverManager.getConnection(url, username, password);
-
-        Statement st = con.createStatement();
-
-        ResultSet rs = st.executeQuery(sql);
-        rs.next();
-        String name = rs.getNString(1);
-
-        System.out.println(name);
-
-        con.close();
-
+        Manager manager = new Manager();
+        manager.addManager();
     }
 
 
