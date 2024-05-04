@@ -514,7 +514,7 @@ CREATE TABLE career_stats (
 --ADD league_admin BIT DEFAULT 'FALSE';
 
 SELECT * FROM clubs 
-WHERE club_name = 'Chelsea'
+WHERE league_id = 2
 
 SELECT * FROM clubs 
 WHERE manager_id IS NOT NULL;
@@ -523,11 +523,28 @@ SELECT * FROM managers;
 
 UPDATE clubs
 SET manager_id = NULL
-WHERE club_name = 'Arsenal'
-DELETE FROM managers;
+WHERE club_name LIKE '%Leicester%';
+
+UPDATE clubs
+SET league_id = 1
+WHERE club_name LIKE 'Southampton'
+
+--DELETE FROM managers;
 
 DELETE FROM managers
-WHERE manager_id = 12;
+WHERE manager_id = 21;
+
+SELECT * FROM clubs
+WHERE league_id = 6
+
+
+
+
+
+
+
+
+
 
 
 
