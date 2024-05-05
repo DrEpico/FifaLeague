@@ -16,8 +16,8 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="jna" level="project" />
     <orderEntry type="library" name="mssql-jdbc-12.6.1.jre11" level="project" />
     <orderEntry type="library" name="tess4j-3.4.8" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>
