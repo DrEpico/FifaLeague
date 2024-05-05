@@ -31,7 +31,7 @@ public class Manager {
                     int count = originResult.getInt(1);
                     if (count > 0) {
                         System.out.println("Origin ID already exists. Skipping insertion.");
-                        return; // Skip insertion
+                        return; // Skip insertion!
                     }
                 }
 
