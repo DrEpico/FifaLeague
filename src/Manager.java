@@ -17,15 +17,11 @@ public class Manager {
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("Enter manager's name: ");
                 String managerName = scanner.nextLine();
-                //String managerName = "Ali";
                 System.out.println("Enter manager's EA ID: ");
                 String originID = scanner.nextLine();
-                //String originID = "Dr_Epico";
                 System.out.println("Is manager an admin? (true/false): ");
                 boolean leagueAdmin = scanner.nextBoolean();
                 scanner.nextLine(); // Consume newline character
-
-                //boolean leagueAdmin = true;
 
                 String checkManagerSQL = "SELECT COUNT(*) FROM managers WHERE origin_id = ?;";
                 try (PreparedStatement checkOriginPs = con.prepareStatement(checkManagerSQL)) {
@@ -50,11 +46,10 @@ public class Manager {
                     int newManagerId = generatedId.getInt(1);
 
                     //Update specified club with newly created manager ID
-                    String updateClubSQL = "UPDATE clubs SET manager_id = ? WHERE club_name LIKE ?;"; //LIKE better?
+                    String updateClubSQL = "UPDATE clubs SET manager_id = ? WHERE club_name LIKE ?;";
                     try (PreparedStatement updateClubPs = con.prepareStatement(updateClubSQL)) {
                         System.out.println("Enter club name associated with the manager: ");
-                        String clubName = scanner.nextLine();//todo: check if club exists or not
-                        //String clubName = "Arsenal";
+                        String clubName = scanner.nextLine();
 
                         String checkClubExistenceSQL = "SELECT COUNT(*) AS club_count FROM clubs WHERE club_name LIKE ?;";
                         try (PreparedStatement checkClubExistencePs  = con.prepareStatement(checkClubExistenceSQL)) {
