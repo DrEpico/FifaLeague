@@ -97,7 +97,7 @@ public class Manager {
         } finally{
             if (con != null) {
                 try {
-                    con.setAutoCommit(true); // Reset auto-commit mode
+                    con.setAutoCommit(true); // Reset auto-commit mode!
                     con.close();
                 } catch (SQLException e) {
                     System.out.println("Failed to close database connection: " + e.getMessage());
