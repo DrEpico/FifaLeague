@@ -50,15 +50,32 @@ public class Manager {
                     int newManagerId = generatedId.getInt(1);
 
                     //Update specified club with newly created manager ID
-                    String updateClubSQL = "UPDATE clubs SET manager_id = ? WHERE club_name = ?;"; //LIKE better?
+                    String updateClubSQL = "UPDATE clubs SET manager_id = ? WHERE club_name LIKE ?;"; //LIKE better?
                     try (PreparedStatement updateClubPs = con.prepareStatement(updateClubSQL)) {
                         System.out.println("Enter club name associated with the manager: ");
                         String clubName = scanner.nextLine();//todo: check if club exists or not
                         //String clubName = "Arsenal";
 
-                        String checkClubSQL = "SELECT manager_id FROM clubs WHERE club_name = ? AND manager_id IS NOT NULL;";
-                        try (PreparedStatement checkClubPs = con.prepareStatement(checkClubSQL)) {
-                            checkClubPs.setString(1, clubName);
+                        String checkClubExistenceSQL = "SELECT COUNT(*) AS club_count FROM clubs WHERE club_name LIKE ?;";
+                        try (PreparedStatement checkClubExistencePs  = con.prepareStatement(checkClubExistenceSQL)) {
+                            checkClubExistencePs.setString(1, "%" + clubName + "%");
+                            ResultSet clubExistenceResult = checkClubExistencePs.executeQuery();
+                            if(clubExistenceResult.next()) {
+                                int clubSearchCount = clubExistenceResult.getInt("club_count");
+                                if(clubSearchCount < 1) {
+                                    System.out.println("Club with that name does not exist.");
+                                    return;
+                                } else if (clubSearchCount > 1){
+                                    System.out.println("More than one club was selected, please try a more specific name");
+                                    return;
+                                }
+                            }
+
+                        }
+
+                        String checkClubManagerSQL = "SELECT manager_id FROM clubs WHERE club_name LIKE ? AND manager_id IS NOT NULL;";
+                        try (PreparedStatement checkClubPs = con.prepareStatement(checkClubManagerSQL)) {
+                            checkClubPs.setString(1, "%" + clubName + "%");
                             ResultSet clubResult = checkClubPs.executeQuery();
                             if (clubResult.next()) {
                                 System.out.println("Club already has a manager assigned. Please choose a different club.");
@@ -67,7 +84,7 @@ public class Manager {
                         }
 
                         updateClubPs.setInt(1, newManagerId);
-                        updateClubPs.setString(2, clubName);
+                        updateClubPs.setString(2, "%" + clubName + "%");
                         updateClubPs.executeUpdate();
                         System.out.println("Manager assigned successfully (Generated manager ID: " + newManagerId + ")");
                     }
