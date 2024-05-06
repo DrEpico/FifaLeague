@@ -1,10 +1,8 @@
-import java.math.BigDecimal;
-
 public class Player {
     private String name;
     private Position position;
     private int age;
-    private Team team;
+    private Club club;
     private Stats stats = new Stats();
     private int value;
     private int weeklyWage;
@@ -18,11 +16,11 @@ public class Player {
     private int seasonCleansheets;
     private int upgradePoints;
 
-    public Player(String name, Position position, int age, Team team, Stats stats, int value, int weeklyWage) {
+    public Player(String name, Position position, int age, Club club, Stats stats, int value, int weeklyWage) {
         this.name = name;
         this.position = position;
         this.age = age;
-        this.team = team;
+        this.club = club;
         this.stats = stats;
         this.value = value;
         this.weeklyWage = weeklyWage;
@@ -129,12 +127,12 @@ public class Player {
         this.age = age;
     }
 
-    public Team getTeam() {
-        return team;
+    public Club getClub() {
+        return club;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setClub(Club club) {
+        this.club = club;
     }
 
     public Stats getStats() {

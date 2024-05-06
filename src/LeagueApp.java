@@ -1,8 +1,3 @@
-import net.sourceforge.tess4j.Tesseract;
-import net.sourceforge.tess4j.TesseractException;
-
-import java.io.File;
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -15,7 +10,7 @@ public class LeagueApp {
 //    public static String password = "0000";
 
     int season = 1;
-    ArrayList<Team> teams = new ArrayList<>();
+    ArrayList<Club> teams = new ArrayList<>();
 
     public void progressSeason(){
         season++;
@@ -27,7 +22,7 @@ public class LeagueApp {
 
 
     public void resetSeasonData(){
-        for(Team team : teams){
+        for(Club team : teams){
             team.winLoss.setSeasonWins(0);
             team.winLoss.setSeasonDraws(0);
             team.winLoss.setSeasonLosses(0);
@@ -41,7 +36,7 @@ public class LeagueApp {
     }
 
     public void addPlayerAge(){
-        for(Team team : teams){
+        for(Club team : teams){
             for(Player player : team.players){
                 player.addAge();
             }
