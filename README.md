@@ -1,4 +1,4 @@
-# FifaLeague
+# FIFA/EAFC24 LEAGUE APP
 
 ## Overview
 As a wide definition, this project outlines the design for a sports management application aimed at providing an efficient way to handle team fixtures, player performance data, and financial aspects such as transfers and budgets.
