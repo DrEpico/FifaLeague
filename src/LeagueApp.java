@@ -12,40 +12,41 @@ public class LeagueApp {
     int season = 1;
     ArrayList<Club> teams = new ArrayList<>();
 
-    public void progressSeason(){
-        season++;
-        resetSeasonData();
-        addPlayerAge();
-    }
+//    public void progressSeason(){
+//        season++;
+//        resetSeasonData();
+//        addPlayerAge();
+//    }
 
     //todo: player upgreade based on position
 
 
-    public void resetSeasonData(){
-        for(Club team : teams){
-            team.winLoss.setSeasonWins(0);
-            team.winLoss.setSeasonDraws(0);
-            team.winLoss.setSeasonLosses(0);
-            team.winLoss.setSeasonMatches(0);
-            for(Player player : team.players){
-                player.setSeasonGoals(0);
-                player.setSeasonAssists(0);
-                player.setSeasonCleansheets(0);
-            }
-        }
-    }
+//    public void resetSeasonData(){
+//        for(Club team : teams){
+//            team.winLoss.setSeasonWins(0);
+//            team.winLoss.setSeasonDraws(0);
+//            team.winLoss.setSeasonLosses(0);
+//            team.winLoss.setSeasonMatches(0);
+//            for(Player player : team.players){
+//                player.setSeasonGoals(0);
+//                player.setSeasonAssists(0);
+//                player.setSeasonCleansheets(0);
+//            }
+//        }
+//    }
 
-    public void addPlayerAge(){
-        for(Club team : teams){
-            for(Player player : team.players){
-                player.addAge();
-            }
-        }
-    }
+//    public void addPlayerAge(){
+//        for(Club team : teams){
+//            for(Player player : team.players){
+//                player.addAge();
+//            }
+//        }
+//    }
 
     public static void main(String[] args) throws SQLException {
-        Manager manager = new Manager();
-        manager.addManager();
+//        Manager manager = new Manager();
+//        manager.addManager();
+        FixtureGenerator fixGen = new FixtureGenerator();
     }
 }
 

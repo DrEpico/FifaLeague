@@ -1,15 +1,19 @@
 import java.util.ArrayList;
 
 public class Club {
-    public String name;
-    public int teamId;
-    public int managerID;
+    public int clubId;
+    public String clubName;
+    public int managerId;
+    public String originId;
+    public String managerName;
 //    ArrayList<Player> players;
 
-    public Club(int teamId, String name, int managerId){
-        this.name = name;
-        this.teamId = teamId;
-        this.managerID = managerId;
+    public Club(int clubId, String name, int managerId, String originId, String managerName){
+        this.clubId = clubId;
+        this.clubName = name;
+        this.managerId = managerId;
+        this.originId = originId;
+        this.managerName = managerName;
 //        players = new ArrayList<>();
     }
 
