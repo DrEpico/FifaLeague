@@ -8,9 +8,10 @@ public class FixtureGenerator {
 
     public FixtureGenerator() throws SQLException {
         //get teams from SQL server
-        generateFixtures(initClubs());
 
+        initClubs();
         printClubs();
+        generateFixtures();
     }
 
     /**
@@ -65,8 +66,20 @@ public class FixtureGenerator {
         }
     }
 
-    private ArrayList<Fixture> generateFixtures(ArrayList<Club> clubs){
+    private ArrayList<Fixture> generateFixtures(){
+        //Number of fixtures should = (number of teams / 2) * (number of teams - 1)
+        while(fixtures.size() < clubs.size()/2 * (clubs.size() - 1)){
+            for(int i = 0; i < clubs.size() - 1; i += 2) {
+                //Create and add a new fixture to the list
+                fixtures.add(new Fixture(clubs.get(i), clubs.get(i + 1)));
+            }
+            for(int i = clubs.size() - 1; i > 1; i--){
+                Club temp = clubs.get(i - 1);
+                clubs.set(i - 1, clubs.get(i));
+                clubs.set(i, temp);
 
+            }
+        }
         return fixtures;
     }
 
