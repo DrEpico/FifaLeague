@@ -9,16 +9,15 @@ Text Recognition: Extract text from uploaded images to streamline data entry pro
 Player Performance Tracking: Store detailed statistics on player performances for analysis.<br>
 Financial Management: Manage transfers and budget allocations within the teams.<br>
 
-## User Interfaces/FrontEnd planning
-PC GUI: React for PC frontend<br>
-Smartphone GUI: Progressive Web App for now which will be replaced with a proper smartphone app later.<br>
-
 ## Technologies Used (or Planned)
-### Server:
+### Backend
 Spring Boot: For robust back-end services.<br>
 Java: As the primary programming language.<br>
 Hibernate: For object-relational mapping (ORM).<br>
 JDBC SQL Server: To manage database connectivity (assumed ready).<br>
+### Frontend
+PC GUI: React for PC frontend<br>
+Smartphone GUI: Progressive Web App for now which will be replaced with a proper smartphone app later.<be>
 
 ![image](https://github.com/DrEpico/FifaLeague/assets/76069708/f83d7bcf-a321-45d4-aaee-3e3c61c7c671)
 
