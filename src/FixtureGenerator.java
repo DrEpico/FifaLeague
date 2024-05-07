@@ -68,18 +68,18 @@ public class FixtureGenerator {
 
     public static List<List<Fixture>> generateFixtures(ArrayList<Club> clubs){
         List<List<Fixture>> seasonFixtures = new ArrayList<>();
-        int totalTeams = clubs.size();
-        int totalWeeks = totalTeams * 2 - 2;
 
         for (int i = 0; i < 2; i++) {
-            generateHalfSeasonFixtures(clubs, totalTeams, totalWeeks, seasonFixtures);
+            generateHalfSeasonFixtures(clubs, seasonFixtures);
         }
 
         return seasonFixtures;
     }
 
     private static void generateHalfSeasonFixtures(
-            ArrayList<Club> clubs, int totalTeams, int totalWeeks, List<List<Fixture>> seasonFixtures) {
+            ArrayList<Club> clubs, List<List<Fixture>> seasonFixtures) {
+        int totalTeams = clubs.size();
+        int totalWeeks = totalTeams - 1;
         for(int week = 0; week < totalWeeks; week++) {
             List<Fixture> weekFixtures = new ArrayList<>();
             for(int match = 0; match < totalTeams/2; match++){
@@ -89,6 +89,7 @@ public class FixtureGenerator {
             Collections.rotate(clubs.subList(1, clubs.size()), 1); //Rotate teams for next week
             seasonFixtures.add(weekFixtures);
         }
+        System.out.println(seasonFixtures.size());
     }
 
     public static void printSeasonFixtures(List<List<Fixture>> seasonFixtures) {
