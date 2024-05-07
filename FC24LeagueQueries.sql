@@ -454,19 +454,19 @@
 --total_cleansheets int NULL,
 --skill_points int NULL;
 
-CREATE TABLE career_stats (
-	stats_id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	weekly_wage int NULL,
-	market_value int NULL,
-	season_goals int NULL,
-	season_assists int NULL,
-	season_cleansheets int NULL,
-	total_goals int NULL,
-	total_assists int NULL,
-	total_cleansheets int NULL,
-	skill_points int NULL,
-	performance_rating varchar(200)
-);
+--CREATE TABLE career_stats (
+--	stats_id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+--	weekly_wage int NULL,
+--	market_value int NULL,
+--	season_goals int NULL,
+--	season_assists int NULL,
+--	season_cleansheets int NULL,
+--	total_goals int NULL,
+--	total_assists int NULL,
+--	total_cleansheets int NULL,
+--	skill_points int NULL,
+--	performance_rating varchar(200)
+--);
 
 --INSERT INTO career_stats(
 --	weekly_wage, 
@@ -516,13 +516,26 @@ CREATE TABLE career_stats (
 SELECT * FROM clubs 
 WHERE league_id = 2
 
+-- search for club
+SELECT * FROM clubs 
+WHERE club_name LIKE '%Leicester%'
+
+-- show players of a club
+SELECT * 
+FROM clubs 
+JOIN players ON clubs.club_id = players.club_id 
+WHERE clubs.club_id = 258;
+
+-- show managers and corresponding clubs
+SELECT c.club_id, c.club_name, m.manager_id, m.origin_id, m.name FROM managers as m JOIN clubs as c ON m.manager_id = c.manager_id
+
 SELECT * FROM clubs 
 WHERE manager_id IS NOT NULL;
 
 SELECT * FROM managers;
 
 UPDATE clubs
-SET manager_id = NULL
+SET manager_id = 31
 WHERE club_name LIKE '%Leicester%';
 
 UPDATE clubs
@@ -532,10 +545,12 @@ WHERE club_name LIKE 'Southampton'
 --DELETE FROM managers;
 
 DELETE FROM managers
-WHERE manager_id = 21;
+WHERE manager_id = 35;
 
 SELECT * FROM clubs
 WHERE league_id = 6
+
+SELECT c.club_id, c.club_name, m.manager_id, m.origin_id, m.name FROM managers as m JOIN clubs as c ON m.manager_id = c.manager_id
 
 
 
