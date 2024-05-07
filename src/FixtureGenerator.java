@@ -1,5 +1,8 @@
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public class FixtureGenerator {
     private String password = "0000";
@@ -7,11 +10,7 @@ public class FixtureGenerator {
     public ArrayList<Club> clubs = new ArrayList<>();
 
     public FixtureGenerator() throws SQLException {
-        //get teams from SQL server
-
-        initClubs();
-        printClubs();
-        generateFixtures();
+        printSeasonFixtures(generateFixtures(initClubs()));
     }
 
     /**
@@ -50,6 +49,7 @@ public class FixtureGenerator {
                 }
             }
         }
+        printClubs();
         return clubs;
     }
 
@@ -66,22 +66,42 @@ public class FixtureGenerator {
         }
     }
 
-    private ArrayList<Fixture> generateFixtures(){
-        //Number of fixtures should = (number of teams / 2) * (number of teams - 1)
-        while(fixtures.size() < clubs.size()/2 * (clubs.size() - 1)){
-            for(int i = 0; i < clubs.size() - 1; i += 2) {
-                //Create and add a new fixture to the list
-                fixtures.add(new Fixture(clubs.get(i), clubs.get(i + 1)));
-            }
-            for(int i = clubs.size() - 1; i > 1; i--){
-                Club temp = clubs.get(i - 1);
-                clubs.set(i - 1, clubs.get(i));
-                clubs.set(i, temp);
+    public static List<List<Fixture>> generateFixtures(ArrayList<Club> clubs){
+        List<List<Fixture>> seasonFixtures = new ArrayList<>();
+        int totalTeams = clubs.size();
+        int totalWeeks = totalTeams * 2 - 2;
 
-            }
+        for (int i = 0; i < 2; i++) {
+            generateHalfSeasonFixtures(clubs, totalTeams, totalWeeks, seasonFixtures);
         }
-        return fixtures;
+
+        return seasonFixtures;
     }
 
+    private static void generateHalfSeasonFixtures(
+            ArrayList<Club> clubs, int totalTeams, int totalWeeks, List<List<Fixture>> seasonFixtures) {
+        for(int week = 0; week < totalWeeks; week++) {
+            List<Fixture> weekFixtures = new ArrayList<>();
+            for(int match = 0; match < totalTeams/2; match++){
+                Fixture fixture = new Fixture(clubs.get(match), clubs.get(9 - match));
+                weekFixtures.add(fixture);
+            }
+            Collections.rotate(clubs.subList(1, clubs.size()), 1); //Rotate teams for next week
+            seasonFixtures.add(weekFixtures);
+        }
+    }
 
+    public static void printSeasonFixtures(List<List<Fixture>> seasonFixtures) {
+        System.out.println("Printing all fixtures of the season:");
+        System.out.println(seasonFixtures.size());
+        System.out.println("--------------------------------------------");
+        for (int week = 0; week < seasonFixtures.size(); week++) {
+            System.out.println("Week " + (week + 1) + ": ");
+            List<Fixture> weekFixtures = seasonFixtures.get(week);
+            for (Fixture fixture : weekFixtures) {
+                System.out.println(fixture.homeTeam.clubName + " vs " + fixture.awayTeam.clubName);
+            }
+            System.out.println();
+        }
+    }
 }

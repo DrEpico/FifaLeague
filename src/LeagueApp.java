@@ -47,6 +47,7 @@ public class LeagueApp {
 //        Manager manager = new Manager();
 //        manager.addManager();
         FixtureGenerator fixGen = new FixtureGenerator();
+
     }
 }
 

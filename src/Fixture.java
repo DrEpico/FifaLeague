@@ -7,8 +7,8 @@ public class Fixture {
         awayTeam = two;
     }
 
-    public String GetFixture(){
-        return homeTeam.managerName + " vs " + awayTeam.managerName + "\n\n";
+    public String getFixture(){
+        return homeTeam.clubName + " vs " + awayTeam.clubName + "\n\n";
     }
 
 
