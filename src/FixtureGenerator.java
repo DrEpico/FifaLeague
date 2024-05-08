@@ -71,6 +71,7 @@ public class FixtureGenerator {
 
         for (int i = 0; i < 2; i++) {
             generateHalfSeasonFixtures(clubs, seasonFixtures);
+            Collections.rotate(clubs, clubs.size() / 2);
         }
 
         return seasonFixtures;

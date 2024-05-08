@@ -3,10 +3,15 @@ public class Fixture {
     Club awayTeam;
 
     //todo: an object might be needed to handle match performances and etc.
-
+    //maybe read players from clubs and etc
     public Fixture(Club one, Club two){
-        homeTeam = one;
-        awayTeam = two;
+//        if(firstHalf) {
+            homeTeam = one;
+            awayTeam = two;
+//        } else {
+//            homeTeam = two;
+//            awayTeam = one;
+//        }
     }
 
     public String getFixture(){
