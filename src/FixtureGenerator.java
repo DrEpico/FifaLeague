@@ -1,6 +1,5 @@
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -66,44 +65,54 @@ public class FixtureGenerator {
         }
     }
 
-    public static List<List<Fixture>> generateFixtures(ArrayList<Club> clubs){
-        List<List<Fixture>> seasonFixtures = new ArrayList<>();
+    /**
+     * This utility method generates fixtures for the season
+     * @param clubs List of club type objects
+     * @return      Returns the generated season
+     */
+    public static Season generateFixtures(ArrayList<Club> clubs){
+        Season season = new Season();
 
         for (int i = 0; i < 2; i++) {
-            generateHalfSeasonFixtures(clubs, seasonFixtures);
+            generateHalfSeasonFixtures(clubs, season);
             Collections.rotate(clubs, clubs.size() / 2);
         }
 
-        return seasonFixtures;
+        return season;
     }
 
     private static void generateHalfSeasonFixtures(
-            ArrayList<Club> clubs, List<List<Fixture>> seasonFixtures) {
+            ArrayList<Club> clubs, Season season) {
         int totalTeams = clubs.size();
         int totalWeeks = totalTeams - 1;
         for(int week = 0; week < totalWeeks; week++) {
-            List<Fixture> weekFixtures = new ArrayList<>();
+            Gameweek gameweek = new Gameweek(week + 1);
             for(int match = 0; match < totalTeams/2; match++){
                 Fixture fixture = new Fixture(clubs.get(match), clubs.get(9 - match));
-                weekFixtures.add(fixture);
+                gameweek.addFixture(fixture);
             }
             Collections.rotate(clubs, 1); //Rotate teams for next week
-            seasonFixtures.add(weekFixtures);
+            season.addGameweek(gameweek);
         }
-        System.out.println(seasonFixtures.size());
+        System.out.println(season.getGameweeks().size());
     }
 
-    public static void printSeasonFixtures(List<List<Fixture>> seasonFixtures) {
+    public static void printSeasonFixtures(Season season) {
         System.out.println("Printing all fixtures of the season:");
-        System.out.println(seasonFixtures.size());
+//        System.out.println(season.getGameweeks().size());
         System.out.println("--------------------------------------------");
-        for (int week = 0; week < seasonFixtures.size(); week++) {
-            System.out.println("Week " + (week + 1) + ": ");
-            List<Fixture> weekFixtures = seasonFixtures.get(week);
-            for (Fixture fixture : weekFixtures) {
-                System.out.println(fixture.homeTeam.clubName + " vs " + fixture.awayTeam.clubName);
+//        for (int week = 0; week < season.getGameweeks().size(); week++) {
+//            System.out.println("Week " + (week + 1) + ": ");
+            int week = 1;
+            for (Gameweek gameweek : season.getGameweeks()) {
+                System.out.println("\nWeek " + week + ": ");
+                for(Fixture fixture : gameweek.getFixtures()){
+                    System.out.println(fixture.homeTeam.clubName + " vs " + fixture.awayTeam.clubName);
+                }
+                week++;
             }
             System.out.println();
         }
     }
-}
+
+
