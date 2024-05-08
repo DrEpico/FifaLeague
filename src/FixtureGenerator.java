@@ -87,7 +87,7 @@ public class FixtureGenerator {
                 Fixture fixture = new Fixture(clubs.get(match), clubs.get(9 - match));
                 weekFixtures.add(fixture);
             }
-            Collections.rotate(clubs.subList(1, clubs.size()), 1); //Rotate teams for next week
+            Collections.rotate(clubs, 1); //Rotate teams for next week
             seasonFixtures.add(weekFixtures);
         }
         System.out.println(seasonFixtures.size());
